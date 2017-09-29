@@ -1,0 +1,271 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "description": {
+      "type": "string"
+    },
+    "short-name": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "v",
+        "f"
+      ]
+    },
+    "included-in-calibration": {
+      "enum": [
+        true,
+        false,
+        null
+      ]
+    },
+    "bernoulli": {
+      "id": "f76sb7a",
+      "type": "object",
+      "properties": {
+        "distribution": {
+          "enum": [
+            "Bernoulli"
+          ]
+        },
+        "parameter-description": {
+          "enum": [
+            "(probability)"
+          ]
+        },
+        "parameter-1": {
+          "type": "number"
+        },
+        "parameter-2": {
+          "type": "null"
+        },
+        "parameter-3": {
+          "type": "null"
+        },
+        "parameter-4": {
+          "type": "null"
+        }
+      }
+    },
+    "beta-binomial": {
+      "type": "object",
+      "properties": {
+        "distribution": {
+          "type": "string",
+          "enum": [
+            "Beta Binomial"
+          ]
+        },
+        "parameter-description": {
+          "type": "string",
+          "enum": [
+            "(n-alpha-beta)"
+          ]
+        },
+        "parameter-1": {
+          "type": "number"
+        },
+        "parameter-2": {
+          "type": "number"
+        },
+        "parameter-3": {
+          "type": "number"
+        },
+        "parameter-4": {
+          "type": "null"
+        }
+      }
+    },
+    "beta": {
+      "type": "object",
+      "properties": {
+        "distribution": {
+          "type": "string",
+          "enum": [
+            "Beta"
+          ]
+        },
+        "parameter-description": {
+          "type": "string",
+          "enum": [
+            "(alpha-beta)"
+          ]
+        },
+        "parameter-1": {
+          "type": "number"
+        },
+        "parameter-2": {
+          "type": "number"
+        },
+        "parameter-3": {
+          "type": "null"
+        },
+        "parameter-4": {
+          "type": "null"
+        }
+      }
+    },
+    "constant": {
+      "type": "object",
+      "properties": {
+        "distribution": {
+          "type": "string",
+          "enum": [
+            "constant"
+          ]
+        },
+        "parameter-description": {
+          "type": "string",
+          "enum": [
+            "value"
+          ]
+        },
+        "parameter-1": {
+          "type": "number"
+        },
+        "parameter-2": {
+          "type": "null"
+        },
+        "parameter-3": {
+          "type": "null"
+        },
+        "parameter-4": {
+          "type": "null"
+        }
+      }
+    },
+    "johnson-su": {
+      "type": "object",
+      "properties": {
+        "distribution": {
+          "type": "string",
+          "enum": [
+            "Johnson Su"
+          ]
+        },
+        "parameter-description": {
+          "type": "string",
+          "enum": [
+            "(shape-shape-location-scale)"
+          ]
+        },
+        "parameter-1": {
+          "type": "number"
+        },
+        "parameter-2": {
+          "type": "number"
+        },
+        "parameter-3": {
+          "type": "number"
+        },
+        "parameter-4": {
+          "type": "number"
+        }
+      }
+    },
+    "normal": {
+      "type": "object",
+      "properties": {
+        "distribution": {
+          "type": "string",
+          "enum": [
+            "Normal"
+          ]
+        },
+        "parameter-description": {
+          "type": "string",
+          "enum": [
+            "(mu-sigma)"
+          ]
+        },
+        "parameter-1": {
+          "type": "number"
+        },
+        "parameter-2": {
+          "type": "number"
+        },
+        "parameter-3": {
+          "type": "null"
+        },
+        "parameter-4": {
+          "type": "null"
+        }
+      }
+    },
+    "weibull": {
+      "type": "object",
+      "properties": {
+        "distribution": {
+          "type": "string",
+          "enum": [
+            "Weibull"
+          ]
+        },
+        "parameter-description": {
+          "type": "string",
+          "enum": [
+            "(alpha-beta)"
+          ]
+        },
+        "parameter-1": {
+          "type": "number"
+        },
+        "parameter-2": {
+          "type": "number"
+        },
+        "parameter-3": {
+          "type": "null"
+        },
+        "parameter-4": {
+          "type": "null"
+        }
+      }
+    },
+
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "$ref": "#/definitions/description"
+        },
+        "short-name": {
+          "$ref": "#/definitions/short-name"
+        },
+        "type": {
+          "$ref": "#/definitions/type"
+        },
+        "included-in-calibration": {
+          "$ref": "#/definitions/included-in-calibration"
+        }
+      },
+      "oneOf": [
+        {"$ref": "#/definitions/bernoulli"},
+        {"$ref": "#/definitions/beta-binomial"},
+        {"$ref": "#/definitions/beta"},
+        {"$ref": "#/definitions/constant"},
+        {"$ref": "#/definitions/johnson-su"},
+        {"$ref": "#/definitions/normal"},
+        {"$ref": "#/definitions/weibull"}
+      ],
+      "required": [
+        "description",
+        "short-name",
+        "type",
+        "distribution",
+        "parameter-description",
+        "parameter-1",
+        "parameter-2",
+        "parameter-3",
+        "parameter-4",
+        "included-in-calibration"
+      ]
+    }
+  },
+  "title": "List of parameters",
+  "type": "array",
+  "uniqueItems": true,
+  "items": {
+    "$ref": "#/definitions/parameter"
+  }
+}
